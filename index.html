@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Yogify Sign-Up</title>
+    <style>
+        /* Basic styles for demonstration */
+        label, input, select {
+            display: block;
+            margin-bottom: 10px;
+        }
+        #wellness-coach-fields {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="signup-form">
+        <h2>Yogify Sign-Up</h2>
+        <label for="category">Select Your Category:</label>
+        <select id="category" name="category">
+            <option value="wellness_centre">Wellness Centre</option>
+            <option value="wellness_coach">Wellness Coach</option>
+        </select>
+
+        <div id="wellness-centre-fields">
+            <h3>Wellness Centre Details</h3>
+            <input type="text" name="centre_name" placeholder="Centre Name">
+            <input type="text" name="location" placeholder="Location">
+            <input type="text" name="contact_details" placeholder="Contact Details">
+            <textarea name="services_offered" placeholder="Services Offered"></textarea>
+            <!-- Other fields for Wellness Centres -->
+        </div>
+
+        <div id="wellness-coach-fields">
+            <h3>Wellness Coach Details</h3>
+            <input type="text" name="coach_name" placeholder="Coach's Name">
+            <input type="text" name="expertise" placeholder="Expertise">
+            <input type="text" name="contact_information" placeholder="Contact Information">
+            <textarea name="areas_of_specialization" placeholder="Areas of Specialization"></textarea>
+            <!-- Other fields for Wellness Coaches -->
+        </div>
+
+        <button id="submit-btn">Submit</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const categorySelect = document.getElementById('category');
+            const wellnessCentreFields = document.getElementById('wellness-centre-fields');
+            const wellnessCoachFields = document.getElementById('wellness-coach-fields');
+
+            categorySelect.addEventListener('change', function () {
+                if (categorySelect.value === 'wellness_centre') {
+                    wellnessCentreFields.style.display = 'block';
+                    wellnessCoachFields.style.display = 'none';
+                } else {
+                    wellnessCentreFields.style.display = 'none';
+                    wellnessCoachFields.style.display = 'block';
+                }
+            });
+
+            document.getElementById('submit-btn').addEventListener('click', function () {
+                const category = categorySelect.value;
+                let formData = {};
+
+                if (category === 'wellness_centre') {
+                    formData = {
+                        category: category,
+                        centre_name: document.querySelector('input[name="centre_name"]').value,
+                        location: document.querySelector('input[name="location"]').value,
+                        contact_details: document.querySelector('input[name="contact_details"]').value,
+                        services_offered: document.querySelector('textarea[name="services_offered"]').value,
+                        // Other Wellness Centre fields
+                    };
+                } else {
+                    formData = {
+                        category: category,
+                        coach_name: document.querySelector('input[name="coach_name"]').value,
+                        expertise: document.querySelector('input[name="expertise"]').value,
+                        contact_information: document.querySelector('input[name="contact_information"]').value,
+                        areas_of_specialization: document.querySelector('textarea[name="areas_of_specialization"]').value,
+                        // Other Wellness Coach fields
+                    };
+                }
+
+                // Displaying the collected data (simulating server-side submission)
+                console.log(formData);
+                // In a real setup, you'd send this data to a server using AJAX or fetch.
+            });
+        });
+    </script>
+</body>
+</html>
